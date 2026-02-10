@@ -4,16 +4,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather App</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
   </head>
   <body>
     <div class="container-wrapper">
       <header class="header">
-        <input type="text" id="search" placeholder="Search city..." />
+        <input type="text" id="search" placeholder="Search for cities..." />
       </header>
 
       <aside class="sidebar">
         <div class="sidebar-top">
-          <div class="logo-icon">logo</div>
+          <a
+            href="https://github.com/goodguyfate"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="logo-link"
+          >
+            <img
+              src="./assets/images/github.svg"
+              alt="github logo"
+              class="logo-icon"
+            />
+          </a>
         </div>
 
         <nav class="sidebar-menu">
@@ -32,11 +47,12 @@
         <section class="overview"></section>
 
         <section class="today-forecast">
-          <h1>today forecast</h1>
+          <h3 class="section-title">Today's Forecast</h3>
+          <div class="forecast-cards-container"></div>
         </section>
 
         <section class="conditions">
-          <h1>conditions</h1>
+          <div class="conditions-grid"></div>
         </section>
 
         <section class="week-forecast">

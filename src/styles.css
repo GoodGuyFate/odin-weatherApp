@@ -29,17 +29,20 @@ body {
   gap: 20px;
   padding: 20px;
   background-color: #0b121e;
+  height: 100dvh;
 }
 .main-content {
   display: grid;
   grid-area: main;
   grid-template-columns: 2fr 1fr;
-  grid-template-rows: auto auto auto;
+  grid-template-rows: auto auto 1fr;
   grid-template-areas:
     "overview week"
     "today    week"
     "details  week";
-  gap: 30px;
+  gap: 20px;
+  height: 100%;
+  min-height: 0;
 }
 .sidebar,
 .today-forecast,
@@ -63,7 +66,7 @@ body {
   grid-area: sidebar;
   background-color: #202b3b;
   border-radius: 20px;
-  height: calc(100vh - 40px);
+  height: 100%;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -99,10 +102,28 @@ body {
   opacity: 1;
   filter: brightness(0) invert(1) drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
 }
+.logo-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  margin-bottom: 20px;
+}
 .logo-icon {
   width: 35px;
   height: 35px;
-  margin-bottom: 20px;
+  cursor: pointer;
+  filter: brightness(0) invert(1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.8;
+}
+.logo-link:hover .logo-icon {
+  opacity: 1;
+  transform: scale(1.1);
+  filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
+}
+.logo-link:active .logo-icon {
+  transform: scale(0.95);
 }
 .menu-item.active {
   color: #ffffff;
@@ -178,3 +199,142 @@ body {
   justify-self: center;
   flex-shrink: 0;
 }
+
+/* Today forecast styles */
+.today-forecast {
+  border-radius: 20px;
+  padding: 20px;
+}
+.today-forecast h3 {
+  color: #8b8b8b;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  padding: 10px;
+}
+.forecast-cards-container {
+  display: flex;
+  overflow-x: auto;
+  justify-content: flex-start;
+  align-items: center;
+  scrollbar-width: thin;
+  scrollbar-color: #4b4b4b transparent;
+}
+.forecast-cards-container::-webkit-scrollbar {
+  height: 6px;
+}
+.forecast-cards-container::-webkit-scrollbar-thumb {
+  background: #4b4b4b;
+  border-radius: 10px;
+}
+.forecast-card {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 5px;
+  min-width: 100px;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+.forecast-card:last-child {
+  border-right: none;
+}
+.forecast-card p:first-child {
+  font-weight: bold;
+  font-size: 1rem;
+  color: #8b8b8b;
+}
+.forecast-card img {
+  width: 70px;
+  height: 70px;
+}
+.forecast-temp {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* Air conditions styles */
+.conditions {
+  border-radius: 20px;
+  padding: 25px;
+}
+.conditions-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  color: #8b8b8b;
+  font-size: 0.8rem;
+}
+.conditions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 20px;
+}
+.condition-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+.condition-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #8b8b8b;
+}
+.condition-item p {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  padding-left: 25px;
+}
+.condition-label span,
+.condition-label i {
+  font-size: 1.1rem;
+}
+
+/* Week forecast */
+.week-forecast {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  overflow-y: auto;
+}
+.week-forecast-row {
+  display: grid;
+  flex-grow: 1;
+  grid-template-columns: 1fr 2fr 1fr;
+  align-items: center;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.week-forecast-row:last-child {
+  border-bottom: none;
+}
+.forecast-day {
+  color: #9399a2;
+  font-weight: 600;
+}
+.forecast-condition-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.forecast-mini-icon {
+  width: 30px;
+  height: 30px;
+}
+.forecast-condition-text {
+  font-weight: 700;
+  color: #ffffff;
+}
+.forecast-temp-range {
+  text-align: right;
+  font-weight: 600;
+}
+.temp-high { color: #ffffff; }
+.temp-low { color: #9399a2; margin-left: 2px; }

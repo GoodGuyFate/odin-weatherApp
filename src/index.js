@@ -1,7 +1,9 @@
 import "./styles.css";
 import { getWeather } from "./modules/API.js";
-import { renderOverview } from "./modules/UI.js";
+import { renderOverview, renderTodayForecast } from "./modules/UI.js";
 import { getBrowserLocation } from "./modules/location.js";
+import { renderConditions } from "./modules/UI.js";
+import { renderWeekForecast } from "./modules/UI.js";
 
 const searchInput = document.querySelector("#search");
 const weatherBtn = document.querySelector("#weather-btn");
@@ -21,6 +23,9 @@ async function initWeather(location = null) {
   const data = await getWeather(targetLocation);
   if (data) {
     renderOverview(data);
+    renderTodayForecast(data.hourly);
+    renderConditions(data.airConditions);
+    renderWeekForecast(data.daily)
   }
 }
 

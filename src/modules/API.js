@@ -20,12 +20,37 @@ export async function getWeather(location) {
 }
 
 function processWeatherData(data) {
+  const current = data.currentConditions;
+  const today = data.days[0];
+  const hourlyData = today.hours;
+
   return {
-    city: data.address,
-    temp: data.currentConditions.temp,
-    feelsLike: data.currentConditions.feelslike,
-    humidity: data.currentConditions.humidity,
-    condition: data.currentConditions.conditions,
-    icon: data.currentConditions.icon,
+    city: data.address || "Unknown Location",
+    temp: Math.round(current.temp),
+    humidity: current.humidity,
+    condition: current.conditions,
+    icon: current.icon,
+
+    airConditions: {
+      realFeel: Math.round(current.feelslike),
+      wind: current.windspeed,
+      uvIndex: current.uvindex ?? 0,
+      chanceOfRain: current.precipprob ?? 0,
+    },
+
+    daily: data.days,
+
+    hourly: hourlyData.map((h) => {
+      const [hours] = h.datetime.split(":");
+      const hourInt = parseInt(hours);
+      const ampm = hourInt >= 12 ? "PM" : "AM";
+      const formattedHour = hourInt % 12 || 12;
+
+      return {
+        time: `${formattedHour}:00 ${ampm}`,
+        temp: Math.round(h.temp),
+        icon: h.icon,
+      };
+    }),
   };
 }
