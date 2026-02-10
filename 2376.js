@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkodin_weatherapp=self.webpackChunkodin_weatherapp||[]).push([[2376],{2376(e,s,p){e.exports=p.p+"assets/images/thermometer-mercury-cold.svg"}}]);

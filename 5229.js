@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkodin_weatherapp=self.webpackChunkodin_weatherapp||[]).push([[5229],{5229(e,s,p){e.exports=p.p+"assets/images/lightning-bolt.svg"}}]);

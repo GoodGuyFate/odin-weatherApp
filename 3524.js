@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkodin_weatherapp=self.webpackChunkodin_weatherapp||[]).push([[3524],{3524(s,e,a){s.exports=a.p+"assets/images/falling-stars.svg"}}]);

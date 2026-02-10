@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkodin_weatherapp=self.webpackChunkodin_weatherapp||[]).push([[5737],{5737(e,s,p){e.exports=p.p+"assets/images/thermometer-colder.svg"}}]);

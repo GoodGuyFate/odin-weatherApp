@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkodin_weatherapp=self.webpackChunkodin_weatherapp||[]).push([[4058],{4058(e,s,a){e.exports=a.p+"assets/images/tornado.svg"}}]);

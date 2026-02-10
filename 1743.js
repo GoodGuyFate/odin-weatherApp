@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkodin_weatherapp=self.webpackChunkodin_weatherapp||[]).push([[1743],{1743(e,s,a){e.exports=a.p+"assets/images/wind-beaufort-11.svg"}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkodin_weatherapp=self.webpackChunkodin_weatherapp||[]).push([[9701],{9701(e,s,p){e.exports=p.p+"assets/images/celsius.svg"}}]);

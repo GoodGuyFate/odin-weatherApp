@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkodin_weatherapp=self.webpackChunkodin_weatherapp||[]).push([[2265],{2265(e,s,a){e.exports=a.p+"assets/images/starry-night.svg"}}]);
