@@ -9,19 +9,37 @@
     <div class="container-wrapper">
       <header class="header">
         <input type="text" id="search" placeholder="Search city..." />
-        <button id="submit-btn">Search</button>
       </header>
 
-      <aside class="sidebar"></aside>
+      <aside class="sidebar">
+        <div class="sidebar-top">
+            <div class="logo-icon">logo</div>
+        </div>
+
+        <nav class="sidebar-menu">
+            <div class="menu-item active" id="weather-btn" data-view="weather">
+                <img src="./assets/images/weather-icon.svg" alt="Weather" class="icon">
+                <span class="label">Weather</span>
+            </div>
+        </nav>
+      </aside>
 
       <main class="main-content">
-        <section class="overview"></section>
+        <section class="overview">
+            <h1>overview</h1>
+        </section>
 
-        <section class="today-forecast"></section>
+        <section class="today-forecast">
+            <h1>today forecast</h1>
+        </section>
 
-        <section class="conditions"></section>
+        <section class="conditions">
+            <h1>conditions</h1>
+        </section>
 
-        <section class="week-forecast"></section>
+        <section class="week-forecast">
+            <h1>week-forecast</h1>
+        </section>
       </main>
     </div>
   </body>
