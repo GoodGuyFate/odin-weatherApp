@@ -19,6 +19,41 @@ body {
   background-color: #0b121e;
   color: #d9e2e6;
 }
+.header {
+  gap: 15px; 
+}
+#unit-toggle {
+  background-color: #202b3b;
+  color: #ffffff;
+  border: none;
+  padding: 0 20px;
+  border-radius: 12px;
+  height: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+}
+
+#unit-toggle:hover {
+  background-color: #2b3a4f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+#unit-toggle:active {
+  transform: scale(0.95);
+}
+#unit-toggle::first-line {
+  color: #0095ff;
+}
+
 .container-wrapper {
   display: grid;
   grid-template-columns: 80px 2fr 1fr;

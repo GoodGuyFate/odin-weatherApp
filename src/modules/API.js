@@ -1,7 +1,7 @@
-export async function getWeather(location) {
+export async function getWeather(location, unit = "metric") {
   try {
     const response = await fetch(
-      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=metric&key=F8PTXNSDMXF4KAFZXYTV9RZ38&contentType=json`,
+      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=${unit}&key=F8PTXNSDMXF4KAFZXYTV9RZ38&contentType=json`,
     );
 
     if (!response.ok) {
@@ -9,17 +9,14 @@ export async function getWeather(location) {
     }
     const weatherData = await response.json();
 
-    console.log("Full Data Object:", weatherData);
-    console.log(processWeatherData(weatherData));
-
-    return processWeatherData(weatherData);
+    return processWeatherData(weatherData, unit);
   } catch (error) {
     console.error("Fetch error:", error);
     alert(error.message);
   }
 }
 
-function processWeatherData(data) {
+function processWeatherData(data, unit) {
   const current = data.currentConditions;
   const today = data.days[0];
   const hourlyData = today.hours;
@@ -27,6 +24,7 @@ function processWeatherData(data) {
   return {
     city: data.address || "Unknown Location",
     temp: Math.round(current.temp),
+    unitSymbol: unit === "metric" ? "°C" : "°F",
     humidity: current.humidity,
     condition: current.conditions,
     icon: current.icon,
@@ -34,6 +32,7 @@ function processWeatherData(data) {
     airConditions: {
       realFeel: Math.round(current.feelslike),
       wind: current.windspeed,
+      windUnit: unit === "metric" ? "km/h" : "mph",
       uvIndex: current.uvindex ?? 0,
       chanceOfRain: current.precipprob ?? 0,
     },

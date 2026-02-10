@@ -1,31 +1,24 @@
 import "./styles.css";
 import { getWeather } from "./modules/API.js";
-import { renderOverview, renderTodayForecast } from "./modules/UI.js";
+import { renderOverview, renderTodayForecast, renderConditions, renderWeekForecast } from "./modules/UI.js";
 import { getBrowserLocation } from "./modules/location.js";
-import { renderConditions } from "./modules/UI.js";
-import { renderWeekForecast } from "./modules/UI.js";
 
 const searchInput = document.querySelector("#search");
 const weatherBtn = document.querySelector("#weather-btn");
+const unitBtn = document.querySelector("#unit-toggle");
 
-async function initWeather(location = null) {
-  let targetLocation = location;
+let currentUnit = "metric";
+let lastLocation = "Cairo";
 
-  if (!targetLocation) {
-    try {
-      targetLocation = await getBrowserLocation();
-    } catch (error) {
-      console.warn("User denied location or error occurred, using default.");
-      targetLocation = "Cairo";
-    }
-  }
-
-  const data = await getWeather(targetLocation);
+async function initWeather(location = lastLocation) {
+  lastLocation = location;
+  
+  const data = await getWeather(location, currentUnit);
   if (data) {
     renderOverview(data);
-    renderTodayForecast(data.hourly);
-    renderConditions(data.airConditions);
-    renderWeekForecast(data.daily)
+    renderTodayForecast(data.hourly, data.unitSymbol);
+    renderConditions(data.airConditions, data.unitSymbol);
+    renderWeekForecast(data.daily, data.unitSymbol);
   }
 }
 
@@ -37,23 +30,32 @@ searchInput.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     const rawLocation = searchInput.value.trim();
     if (rawLocation) {
-      const formattedLocation = capitalize(rawLocation);
-      initWeather(formattedLocation);
+      initWeather(capitalize(rawLocation));
       searchInput.value = "";
       searchInput.blur();
     }
   }
 });
 
-weatherBtn.addEventListener("click", () => {
-  console.log("Switching to Weather Tab");
+unitBtn.addEventListener("click", () => {
+  currentUnit = currentUnit === "metric" ? "us" : "metric";
+  unitBtn.textContent = currentUnit === "metric" ? "Display: °C" : "Display: °F";
+  initWeather(lastLocation);
+});
 
+weatherBtn.addEventListener("click", () => {
   document
     .querySelectorAll(".menu-item")
     .forEach((item) => item.classList.remove("active"));
   weatherBtn.classList.add("active");
-
-  const currentCity = "Cairo";
-  initWeather(currentCity);
+  initWeather(lastLocation);
 });
-initWeather("Cairo");
+
+(async () => {
+  try {
+    const browserLoc = await getBrowserLocation();
+    initWeather(browserLoc);
+  } catch {
+    initWeather("Cairo");
+  }
+})();

@@ -11,8 +11,8 @@ async function loadWeatherIcon(iconName) {
 
 export async function renderOverview(data) {
   const container = document.querySelector(".overview");
-
   container.textContent = "";
+
   const infoDiv = document.createElement("div");
   infoDiv.classList.add("weather-info");
 
@@ -30,7 +30,7 @@ export async function renderOverview(data) {
 
   const degree = document.createElement("h2");
   degree.classList.add("degree");
-  degree.textContent = `${Math.round(data.temp)}°`;
+  degree.textContent = `${Math.round(data.temp)}${data.unitSymbol}`;
 
   infoDiv.append(cityHeader, degree);
 
@@ -42,7 +42,7 @@ export async function renderOverview(data) {
   container.append(infoDiv, iconImg);
 }
 
-export async function renderTodayForecast(hourlyData) {
+export async function renderTodayForecast(hourlyData, unitSymbol) {
   const forecastContainer = document.querySelector(".forecast-cards-container");
   forecastContainer.textContent = "";
 
@@ -61,7 +61,7 @@ export async function renderTodayForecast(hourlyData) {
 
     const tempLabel = document.createElement("p");
     tempLabel.classList.add("forecast-temp");
-    tempLabel.textContent = `${hour.temp}°`;
+    tempLabel.textContent = `${hour.temp}${unitSymbol}`;
 
     card.append(timeLabel, iconImg, tempLabel);
     forecastContainer.append(card);
@@ -76,7 +76,6 @@ function createConditionItem(iconClass, labelText, valueText) {
   labelDiv.className = "condition-label";
 
   const icon = document.createElement("i");
-
   icon.classList.add("fas", ...iconClass.split(" "));
 
   const span = document.createElement("span");
@@ -91,18 +90,17 @@ function createConditionItem(iconClass, labelText, valueText) {
   return item;
 }
 
-export async function renderConditions(data) {
+export async function renderConditions(data, unitSymbol) {
   const grid = document.querySelector(".conditions-grid");
-
   grid.textContent = "";
 
   const conditions = [
     {
       icon: "fa-thermometer-half",
       label: "Feels like",
-      value: `${data.realFeel}°`,
+      value: `${data.realFeel}${unitSymbol}`,
     },
-    { icon: "fa-wind", label: "Wind", value: `${data.wind} km/h` },
+    { icon: "fa-wind", label: "Wind", value: `${data.wind} ${data.windUnit}` },
     {
       icon: "fa-tint",
       label: "Chance of rain",
@@ -117,7 +115,7 @@ export async function renderConditions(data) {
   });
 }
 
-function createForecastRow(dayData) {
+function createForecastRow(dayData, unitSymbol) {
   const row = document.createElement("div");
   row.className = "week-forecast-row";
 
@@ -152,13 +150,17 @@ function createForecastRow(dayData) {
   lowTemp.className = "temp-low";
   lowTemp.textContent = Math.round(dayData.tempmin);
 
-  tempRange.append(highTemp, separator, lowTemp);
+  const unit = document.createElement("span");
+  unit.textContent = unitSymbol;
+  unit.style.fontSize = "0.7rem";
+  unit.style.marginLeft = "2px";
 
+  tempRange.append(highTemp, separator, lowTemp, unit);
   row.append(dayLabel, conditionGroup, tempRange);
   return row;
 }
 
-export async function renderWeekForecast(days) {
+export async function renderWeekForecast(days, unitSymbol) {
   const container = document.querySelector(".week-forecast");
   if (!container) return;
 
@@ -184,7 +186,7 @@ export async function renderWeekForecast(days) {
       condition: day.conditions.split(",")[0],
       tempmax: day.tempmax,
       tempmin: day.tempmin,
-    });
+    }, unitSymbol);
 
     container.appendChild(row);
   });
