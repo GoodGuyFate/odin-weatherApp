@@ -13,7 +13,7 @@ html {
 }
 body {
   line-height: 1.5;
-  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   background-color: #0b121e;
@@ -39,7 +39,7 @@ body {
     "overview week"
     "today    week"
     "details  week";
-  gap: 20px;
+  gap: 30px;
 }
 .sidebar,
 .today-forecast,
@@ -47,10 +47,6 @@ body {
 .week-forecast {
   background-color: #202b3b;
   border-radius: 20px;
-  padding: 20px;
-}
-.overview {
-  grid-area: overview;
   padding: 20px;
 }
 .today-forecast {
@@ -138,4 +134,49 @@ body {
   border-radius: 12px;
   color: white;
   width: 100%;
+  height: 50px;
+  font-size: 1rem;
+}
+
+.overview {
+  grid-area: overview;
+  padding-right: 40px;
+  padding-left: 40px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  min-height: 250px;
+}
+.weather-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+}
+.city-header {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.weather-info h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+.weather-info .rain-chance {
+  color: #9399a2;
+  font-size: 1rem;
+}
+.weather-info .degree {
+  font-size: 4.5rem;
+  font-weight: 800;
+  margin-top: 0;
+}
+.main-weather-img {
+  width: 250px;
+  max-width: 250px;
+  justify-self: center;
+  filter: invert(62%) sepia(72%) saturate(3075%) hue-rotate(33deg)
+    brightness(130%) contrast(113%);
+  flex-shrink: 0;
 }
