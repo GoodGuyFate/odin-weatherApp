@@ -5,28 +5,27 @@ export async function getWeather(location) {
     );
 
     if (!response.ok) {
-        throw new Error(`City not found (${response.status})`);
+      throw new Error(`City not found (${response.status})`);
     }
     const weatherData = await response.json();
 
-    console.log("Full Data Object:", weatherData)
-    console.log(processWeatherData(weatherData))
+    console.log("Full Data Object:", weatherData);
+    console.log(processWeatherData(weatherData));
 
-    return processWeatherData(weatherData)
-
+    return processWeatherData(weatherData);
   } catch (error) {
     console.error("Fetch error:", error);
-    alert(error.message)
+    alert(error.message);
   }
 }
 
 function processWeatherData(data) {
-    return {
-        city: data.resolvedAddress,
-        temp: data.currentConditions.temp,
-        feelsLike: data.currentConditions.feelslike,
-        humidity: data.currentConditions.humidity,
-        condition: data.currentConditions.conditions,
-        icon: data.currentConditions.icon 
-    };
+  return {
+    city: data.address,
+    temp: data.currentConditions.temp,
+    feelsLike: data.currentConditions.feelslike,
+    humidity: data.currentConditions.humidity,
+    condition: data.currentConditions.conditions,
+    icon: data.currentConditions.icon,
+  };
 }

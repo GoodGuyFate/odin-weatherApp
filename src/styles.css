@@ -173,10 +173,8 @@ body {
   margin-top: 0;
 }
 .main-weather-img {
-  width: 250px;
-  max-width: 250px;
+  width: 300px;
+  max-width: 300px;
   justify-self: center;
-  filter: invert(62%) sepia(72%) saturate(3075%) hue-rotate(33deg)
-    brightness(130%) contrast(113%);
   flex-shrink: 0;
 }
